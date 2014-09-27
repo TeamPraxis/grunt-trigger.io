@@ -16,6 +16,6 @@ dump.rdb
 .DS_Store
 
 # Build related files
-
+node_modules
 TriggerToolkit
 tmp
