@@ -1,0 +1,21 @@
+# Logs
+*.log
+npm-debug.log
+log/*
+
+# Runtime data
+pids
+*.pid
+*.seed
+dump.rdb
+
+# Grunt intermediate storage
+.grunt
+
+# Mac OSX system files
+.DS_Store
+
+# Build related files
+node_modules/*
+TriggerToolkit
+tmp
