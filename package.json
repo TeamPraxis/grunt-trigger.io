@@ -1,15 +1,15 @@
 {
-  "name": "grunt-trigger",
-  "description": "Sets up Trigger Toolkit and build tasks",
+  "name": "grunt-trigger.io",
+  "description": "Sets up Trigger.io Toolkit and forge tasks",
   "version": "0.0.1",
-  "homepage": "https://github.com/TeamPraxis/grunt-trigger",
+  "homepage": "https://github.com/TeamPraxis/grunt-trigger.io",
   "author": {
     "name": "Chris Fang",
     "email": "cfang@teampraxis.com"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:TeamPraxis/grunt-trigger.git"
+    "url": "git@github.com:TeamPraxis/grunt-trigger.io.git"
   },
   "licenses": [
     {
