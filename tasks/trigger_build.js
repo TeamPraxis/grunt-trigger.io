@@ -15,7 +15,7 @@ module.exports = function (grunt) {
     var options = this.options({
       buildFolder: './build',
       platform: 'ios',
-      forgePath: __dirname + '/../TriggerToolkit/'
+      forgePath: __dirname + '/../lib/TriggerToolkit/'
     });
 
     if (!process.env.TRIGGER_USER || !process.env.TRIGGER_PASSWORD) {
@@ -31,7 +31,7 @@ module.exports = function (grunt) {
     }
 
     if (!grunt.file.exists(options.forgePath)) {
-      grunt.warn('Trigger.io Toolkit not found. Did you run trigger_install?');
+      grunt.warn('Trigger.io Toolkit not found.');
     }
 
     if (!grunt.file.exists(options.buildFolder)) {

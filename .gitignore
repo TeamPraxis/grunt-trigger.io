@@ -17,5 +17,6 @@ dump.rdb
 
 # Build related files
 node_modules
-TriggerToolkit
-tmp
+
+# TriggerToolkit
+lib
