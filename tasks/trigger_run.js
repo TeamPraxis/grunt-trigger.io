@@ -32,6 +32,10 @@ module.exports = function (grunt) {
       options.forgePath += '/';
     }
 
+    if (!grunt.file.exists(options.forgePath)) {
+      grunt.warn('Trigger.io Toolkit not found. Did you run trigger_install?');
+    }
+
     if (!grunt.file.exists(options.buildFolder)) {
       grunt.warn('Build directory ' + options.buildFolder + ' does not exist');
     }
