@@ -15,7 +15,7 @@ module.exports = function (grunt) {
     var options = this.options({
       buildFolder: './build',
       platform: 'ios',
-      forgePath: __dirname + '/../lib/TriggerToolkit/'
+      forgePath: __dirname + '/../TriggerToolkit/'
     });
 
     if (!process.env.TRIGGER_USER || !process.env.TRIGGER_PASSWORD) {

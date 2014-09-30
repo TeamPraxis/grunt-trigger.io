@@ -17,7 +17,7 @@ module.exports = function (grunt) {
       platform: 'ios',
       device: 'simulator',
       simulatorfamily: 'iphone',
-      forgePath: __dirname + '/../lib/TriggerToolkit/'
+      forgePath: __dirname + '/../TriggerToolkit/'
     });
 
     if (!process.env.TRIGGER_USER || !process.env.TRIGGER_PASSWORD) {
