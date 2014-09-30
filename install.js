@@ -20,7 +20,7 @@ async.waterfall([
   // Create the install directory
   function (callback) {
     fs.mkdir(installDir, function (err) {
-      if (err.code === 'EEXIST') {
+      if (err && err.code === 'EEXIST') {
         return callback(null);
       }
       callback(err);
