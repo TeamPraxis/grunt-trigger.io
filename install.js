@@ -14,18 +14,8 @@ var async = require('async'),
 
 var toolkitTar = 'TriggerToolkit.tar.gz';
 var toolkitUrl = 'https://toolkit-installer.s3.amazonaws.com/3.3.82/' + toolkitTar;
-var installDir = 'lib';
 
 async.waterfall([
-  // Create the install directory
-  function (callback) {
-    fs.mkdir(installDir, function (err) {
-      if (err && err.code === 'EEXIST') {
-        return callback(null);
-      }
-      callback(err);
-    });
-  },
   // Download Trigger.io Toolkit
   function (callback) {
     var total = 0;
@@ -46,7 +36,7 @@ async.waterfall([
         console.log('An error has occurred: ', err);
         process.exit(1);
       })
-      .pipe(fs.createWriteStream(path.join(installDir, toolkitTar)))
+      .pipe(fs.createWriteStream(toolkitTar))
       .on('error', function (err) {
         console.log('An error has occurred: ', err);
         process.exit(1);
@@ -57,12 +47,16 @@ async.waterfall([
         callback(err);
       });
   },
+  // Extract tar
   function (callback) {
-    var options = {
-      cwd: installDir
-    };
     console.log('Extracting tar contents (via spawned process)');
-    cp.execFile('tar', ['xzf', toolkitTar], options, function (err) {
+    cp.execFile('tar', ['xzf', toolkitTar], {}, function (err) {
+      callback(err);
+    });
+  },
+  // Remove tar after extraction
+  function (callback) {
+    fs.unlink(toolkitTar, function (err) {
       callback(err);
     });
   }
