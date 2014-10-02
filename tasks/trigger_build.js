@@ -12,6 +12,7 @@ module.exports = function (grunt) {
   grunt.registerMultiTask('trigger_build', 'Executes forge build command', function () {
     var done = this.async();
 
+    // Defaults
     var options = this.options({
       buildFolder: './build',
       platform: 'ios',

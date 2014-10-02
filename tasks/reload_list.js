@@ -9,15 +9,12 @@
 'use strict';
 
 module.exports = function (grunt) {
-  grunt.registerMultiTask('trigger_run', 'Executes forge run command', function () {
+  grunt.registerMultiTask('reload_list', 'Exposes reload list command on base project directory', function () {
     var done = this.async();
 
     // Defaults
     var options = this.options({
       buildFolder: './build',
-      platform: 'ios',
-      device: 'simulator',
-      simulatorfamily: 'iphone',
       forgePath: __dirname + '/../TriggerToolkit/'
     });
 
@@ -42,21 +39,13 @@ module.exports = function (grunt) {
     }
 
     // Initial validations have passed, execute forge build
-    grunt.log.write('Starting application (Press CTRL+C to end)');
+    grunt.log.write('Building application...');
     var args = [
-      'run', options.platform,
+      'reload', 'list',
       '--username', process.env.TRIGGER_USER,
       '--password', process.env.TRIGGER_PASSWORD
     ];
 
-    // Add ios run settings
-    if (options.platform === 'ios') {
-      args.push('--ios.device');
-      args.push(options.device);
-      args.push('--ios.simulatorfamily');
-      args.push(options.simulatorfamily);
-    }
-    
     grunt.util.spawn({
       cmd: options.forgePath + 'forge',
       opts: {
@@ -69,6 +58,7 @@ module.exports = function (grunt) {
         done();
         return;
       } else {
+        grunt.log.writeln('DONE!');
         done();
       }
     });
