@@ -34,14 +34,14 @@ module.exports = function (grunt) {
     }
 
     if (!grunt.file.exists(options.forgePath)) {
-      grunt.warn('Trigger.io Toolkit not found.');
+      grunt.warn('Trigger.io Toolkit not found');
     }
 
     if (!grunt.file.exists(options.buildFolder)) {
       grunt.warn('Build directory ' + options.buildFolder + ' does not exist');
     }
 
-    // Initial validations have passed, execute forge build
+    // Initial validations have passed, execute forge run
     grunt.log.write('Starting application (Press CTRL+C to end)');
     var args = [
       'run', options.platform,

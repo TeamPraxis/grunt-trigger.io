@@ -32,7 +32,7 @@ module.exports = function (grunt) {
     }
 
     if (!grunt.file.exists(options.forgePath)) {
-      grunt.warn('Trigger.io Toolkit not found.');
+      grunt.warn('Trigger.io Toolkit not found');
     }
 
     if (!grunt.file.exists(options.buildFolder)) {

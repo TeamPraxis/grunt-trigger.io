@@ -9,12 +9,13 @@
 'use strict';
 
 module.exports = function (grunt) {
-  grunt.registerMultiTask('reload_list', 'Exposes reload list command on base project directory', function () {
+  grunt.registerMultiTask('trigger_reload', 'Exposes forge reload command on base project directory', function (stream) {
     var done = this.async();
 
     // Defaults
     var options = this.options({
       buildFolder: './build',
+      action: 'list',
       forgePath: __dirname + '/../TriggerToolkit/'
     });
 
@@ -31,20 +32,29 @@ module.exports = function (grunt) {
     }
 
     if (!grunt.file.exists(options.forgePath)) {
-      grunt.warn('Trigger.io Toolkit not found.');
+      grunt.warn('Trigger.io Toolkit not found');
     }
 
     if (!grunt.file.exists(options.buildFolder)) {
       grunt.warn('Build directory ' + options.buildFolder + ' does not exist');
     }
 
-    // Initial validations have passed, execute forge build
-    grunt.log.write('Building application...');
-    var args = [
-      'reload', 'list',
+    if (options.action !== 'list' && !stream) {
+      grunt.warn('Stream name not defined');
+    }
+
+    // Initial validations have passed, execute forge reload
+    var args = [ 'reload', options.action ];
+    
+    // Specify stream name if reload action requires it
+    if (options.action !== 'list') {
+      args.push(stream);
+    }
+
+    args.concat([
       '--username', process.env.TRIGGER_USER,
       '--password', process.env.TRIGGER_PASSWORD
-    ];
+    ]);
 
     grunt.util.spawn({
       cmd: options.forgePath + 'forge',
@@ -58,7 +68,7 @@ module.exports = function (grunt) {
         done();
         return;
       } else {
-        grunt.log.writeln('DONE!');
+        console.log(result.stderr);
         done();
       }
     });
