@@ -38,8 +38,9 @@ module.exports = function (grunt) {
       grunt.warn('Build directory ' + options.buildFolder + ' does not exist');
     }
 
+    // Initial validations have passed, build the reload
+    grunt.log.write('Building application...');
     grunt.util.spawn({
-      // Build the reload
       cmd: options.forgePath + 'forge',
       opts: {
         cwd: options.buildFolder
@@ -54,7 +55,8 @@ module.exports = function (grunt) {
         done();
         return;
       } else {
-        grunt.log.writeln(result.stderr);
+        grunt.log.writeln('DONE!');
+        grunt.log.write('Pushing reload...');
         grunt.util.spawn({
           cmd: options.forgePath + 'forge',
           opts: {
@@ -70,7 +72,7 @@ module.exports = function (grunt) {
             done();
             return;
           } else {
-            grunt.log.writeln(result.stderr);
+            grunt.log.writeln('DONE!');
             done();
           }
         });        
