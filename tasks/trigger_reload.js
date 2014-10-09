@@ -9,13 +9,12 @@
 'use strict';
 
 module.exports = function (grunt) {
-  grunt.registerMultiTask('trigger_reload', 'Exposes forge reload command on base project directory', function (stream) {
+  grunt.registerMultiTask('trigger_reload', 'Exposes forge reload command on base project directory', function () {
     var done = this.async();
 
     // Defaults
     var options = this.options({
       buildFolder: './build',
-      action: 'list',
       forgePath: __dirname + '/../TriggerToolkit/'
     });
 
@@ -39,37 +38,42 @@ module.exports = function (grunt) {
       grunt.warn('Build directory ' + options.buildFolder + ' does not exist');
     }
 
-    if (options.action !== 'list' && !stream) {
-      grunt.warn('Stream name not defined');
-    }
-
-    // Initial validations have passed, execute forge reload
-    var args = [ 'reload', options.action ];
-    
-    // Specify stream name if reload action requires it
-    if (options.action !== 'list') {
-      args.push(stream);
-    }
-
-    args.concat([
-      '--username', process.env.TRIGGER_USER,
-      '--password', process.env.TRIGGER_PASSWORD
-    ]);
-
     grunt.util.spawn({
+      // Build the reload
       cmd: options.forgePath + 'forge',
       opts: {
         cwd: options.buildFolder
       },
-      args: args
+      args: [ 'build', 'reload',
+        '--username', process.env.TRIGGER_USER,
+        '--password', process.env.TRIGGER_PASSWORD
+      ]
     }, function (error, result, code) {
       if (error) {
         grunt.warn('Failed: ' + error, code);
         done();
         return;
       } else {
-        console.log(result.stderr);
-        done();
+        grunt.log.writeln(result.stderr);
+        grunt.util.spawn({
+          cmd: options.forgePath + 'forge',
+          opts: {
+            cwd: options.buildFolder
+          },
+          args: [ 'reload', 'push', 'default',
+            '--username', process.env.TRIGGER_USER,
+            '--password', process.env.TRIGGER_PASSWORD
+          ]
+        }, function (error, result, code) {
+          if (error) {
+            grunt.warn('Failed: ' + error, code);
+            done();
+            return;
+          } else {
+            grunt.log.writeln(result.stderr);
+            done();
+          }
+        });        
       }
     });
   });
