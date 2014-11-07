@@ -56,7 +56,12 @@ module.exports = function (grunt) {
       args.push('--ios.simulatorfamily');
       args.push(options.simulatorfamily);
     }
-    
+
+    if (options.profile) {
+      args.push('--ios.profile.provisioning_profile');
+      args.push(options.profile);
+    }
+
     grunt.util.spawn({
       cmd: options.forgePath + 'forge',
       opts: {
