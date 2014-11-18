@@ -57,6 +57,11 @@ module.exports = function (grunt) {
       args.push(options.certificate);
     }
 
+    if (options.password) {
+      args.push('--ios.profile.developer_certificate_password');
+      args.push(options.password);
+    }
+
     grunt.util.spawn({
       cmd: options.forgePath + 'forge',
       opts: {
