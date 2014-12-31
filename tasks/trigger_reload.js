@@ -15,7 +15,8 @@ module.exports = function (grunt) {
     // Defaults
     var options = this.options({
       buildFolder: './build',
-      forgePath: __dirname + '/../TriggerToolkit/'
+      forgePath: __dirname + '/../TriggerToolkit/',
+      stream: 'default'
     });
 
     if (!process.env.TRIGGER_USER || !process.env.TRIGGER_PASSWORD) {
@@ -62,7 +63,7 @@ module.exports = function (grunt) {
           opts: {
             cwd: options.buildFolder
           },
-          args: [ 'reload', 'push', 'default',
+          args: [ 'reload', 'push', options.stream,
             '--username', process.env.TRIGGER_USER,
             '--password', process.env.TRIGGER_PASSWORD
           ]
@@ -75,7 +76,7 @@ module.exports = function (grunt) {
             grunt.log.writeln('DONE!');
             done();
           }
-        });        
+        });
       }
     });
   });

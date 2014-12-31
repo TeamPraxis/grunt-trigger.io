@@ -1,7 +1,7 @@
 {
   "name": "grunt-trigger.io",
   "description": "Sets up Trigger.io Toolkit and forge tasks",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/TeamPraxis/grunt-trigger.io",
   "author": {
     "name": "Chris Fang",
