@@ -18,6 +18,8 @@ module.exports = function (grunt) {
       platform: 'ios',
       device: 'simulator',
       simulatorfamily: 'iphone',
+      devicetypeid: 'com.apple.CoreSimulator.SimDeviceType.iPhone-6',
+      iosversion: '8.1',
       forgePath: __dirname + '/../TriggerToolkit/'
     });
 
@@ -55,6 +57,8 @@ module.exports = function (grunt) {
       args.push(options.device);
       args.push('--ios.simulatorfamily');
       args.push(options.simulatorfamily);
+      args.push('--ios.devicetypeid');
+      args.push(options.devicetypeid + ', ' + options.iosversion);
     }
 
     if (options.profile) {
