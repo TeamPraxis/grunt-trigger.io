@@ -16,7 +16,6 @@ module.exports = function (grunt) {
     var options = this.options({
       buildFolder: './build',
       platform: 'ios',
-      device: 'simulator',
       simulatorfamily: 'iphone',
       devicetypeid: 'com.apple.CoreSimulator.SimDeviceType.iPhone-6',
       iosversion: '8.1',
@@ -54,11 +53,16 @@ module.exports = function (grunt) {
     // Add ios run settings
     if (options.platform === 'ios') {
       args.push('--ios.device');
-      args.push(options.device);
+      args.push(options.device || 'simulator');
       args.push('--ios.simulatorfamily');
       args.push(options.simulatorfamily);
       args.push('--ios.devicetypeid');
       args.push(options.devicetypeid + ', ' + options.iosversion);
+    }
+
+    if (options.platform === 'android') {
+      args.push('--android.device');
+      args.push(options.device || 'emulator');
     }
 
     if (options.profile) {
