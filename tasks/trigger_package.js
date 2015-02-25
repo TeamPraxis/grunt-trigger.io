@@ -62,6 +62,26 @@ module.exports = function (grunt) {
       args.push(options.password);
     }
 
+    if (options.keystore) {
+      args.push('--android.profile.keystore');
+      args.push(options.keystore);
+    }
+
+    if (options.storepass) {
+      args.push('--android.profile.storepass');
+      args.push(options.storepass);
+    }
+
+    if (options.keypass) {
+      args.push('--android.profile.keypass');
+      args.push(options.keypass);
+    }
+
+    if (options.keyalias) {
+      args.push('--android.profile.keyalias');
+      args.push(options.keyalias);
+    }
+
     grunt.util.spawn({
       cmd: options.forgePath + 'forge',
       opts: {
