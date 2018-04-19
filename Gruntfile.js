@@ -1,6 +1,6 @@
 /*
  * grunt-trigger
- * https://github.com/TeamPraxis/grunt-trigger
+ * https://github.com/sagely/grunt-trigger
  *
  * Copyright (c) 2014 Chris Fang
  * Licensed under the MIT license.
